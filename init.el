@@ -30,6 +30,21 @@
 ;; comment out
 (global-set-key "\C-c\C-c" 'comment-region)
 
+;;可視化                                                                                                                              
+(setq whitespace-style
+      '(tabs tab-mark spaces space-mark))
+(setq whitespace-space-regexp "\\(\x3000+\\)")                                                                                      
+(setq whitespace-display-mappings
+      '((space-mark ?\x3000 [?\□])
+        (tab-mark   ?\t   [?\xBB ?\t])
+        ))
+(require 'whitespace)
+(global-whitespace-mode 1)
+(set-face-foreground 'whitespace-space "LightSlateGray")
+(set-face-background 'whitespace-space "DarkSlateGray")
+(set-face-foreground 'whitespace-tab "LightSlateGray")
+(set-face-background 'whitespace-tab "DarkSlateGray")
+
 ;; ruby
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (autoload 'ruby-mode "ruby-mode"
@@ -63,6 +78,19 @@
                 ("\\.php\\'" . php-mode)
                 )
               auto-mode-alist))
+
+;;==========================================================
+;;         php-modeの設定
+;;==========================================================
+;; php-mode                                                                                                                           
+(load "php-mode")
+
+(setq php-mode-force-pear t)
+(add-hook 'php-mode-hook
+    (lambda ()
+        (setq tab-width 4)
+        (setq c-basic-offset 4)
+        (setq indent-tabs-mode t)))
 
 ;;==========================================================
 ;;         web-modeの設定
